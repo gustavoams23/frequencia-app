@@ -20,4 +20,4 @@ if st.button("Calcular Frequência"):
     total = disciplinas[disciplina]
     frequencia = (1 - faltas / total) * 100
     frequencia = max(0, frequencia)
-    st.success(f"Frequência em {disciplina}: {frequencia:.2f}%")
+    st.success(f"Frequência em {disciplina}: {frequencia:.0f}%")
