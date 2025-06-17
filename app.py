@@ -1,6 +1,10 @@
 import streamlit as st
 
-disciplinas = {
+# Título do app
+st.title("Calculadora de Frequência Escolar")
+
+# Dicionário com total de aulas por disciplina
+total_aulas = {
     "Português": 120,
     "Matemática": 120,
     "História": 60,
@@ -11,13 +15,16 @@ disciplinas = {
     "Ed. Física": 40
 }
 
-st.title("📊 Calculadora de Frequência Escolar")
+# Seleciona a disciplina
+disciplina = st.selectbox("Selecione a disciplina:", list(total_aulas.keys()))
 
-disciplina = st.selectbox("Selecione a disciplina:", list(disciplinas.keys()))
-faltas = st.number_input(f"Digite o número de faltas em {disciplina}:", min_value=0, step=1)
+# Entrada do número de faltas
+faltas = st.number_input("Digite o número de faltas do aluno:", min_value=0)
 
-if st.button("Calcular Frequência"):
-    total = disciplinas[disciplina]
-    frequencia = (1 - faltas / total) * 100
-    frequencia = max(0, frequencia)
-    st.success(f"Frequência em {disciplina}: {frequencia:.0f}%")
+# Botão para calcular
+if st.button("Calcular frequência"):
+    aulas = total_aulas[disciplina]
+    presencas = aulas - faltas
+    frequencia = (presencas / aulas) * 100
+    frequencia_arredondada = round(frequencia)  # arredonda para número inteiro
+    st.success(f"Frequência em {disciplina}: {frequencia_arredondada}%")
